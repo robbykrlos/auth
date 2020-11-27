@@ -19,6 +19,7 @@
                             type="email"
                             :class="{ 'is-danger': errors.has('email'), 'is-success': isSuccessful }"
                             :placeholder="i18n('Email')"
+                            autocomplete="email"
                             @input="errors.clear('email')">
                         <span class="icon is-small is-left">
                             <fa icon="envelope"/>
@@ -44,6 +45,7 @@
                             :type="passwordMeta.content"
                             :class="{ 'is-danger': errors.has('password'), 'is-success': isSuccessful }"
                             :placeholder="i18n('Password')"
+                            autocomplete="current-password"
                             @input="errors.clear('password')">
                         <span class="icon is-small is-left">
                             <fa icon="lock"/>
