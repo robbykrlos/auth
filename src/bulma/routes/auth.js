@@ -1,7 +1,7 @@
 import store from '@enso-ui/ui/src/core/services/store';
 
 const Login = () => import('../pages/auth/Login.vue');
-const Email = () => import('../pages/auth/password/Email.vue');
+const Email = () => import('../pages/auth/password/EmailResetLink.vue');
 const Reset = () => import('../pages/auth/password/Reset.vue');
 
 const redirect = (to, from, next) => {

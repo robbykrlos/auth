@@ -12,12 +12,8 @@
                 width="15%"
                 height="4"
                 stroke-width="4"
-                :x="2.5 + (i-1) * 15 + (i-1) * 5 + '%'"
-                :stroke="
-                    i <= score() + 1
-                        ? 'green'
-                        : 'orangered'
-                "/>
+                :x="x(i)"
+                :stroke="i <= score() + 1 ? 'green' : 'orangered'"/>
         </svg>
     </transition>
 </template>
@@ -40,6 +36,10 @@ export default {
             return this.password
                 ? zxcvbn(this.password).score
                 : 6;
+        },
+        x(i) {
+            const x = 2.5 + (i-1) * 15 + (i-1) * 5;
+            return `${x}%`;
         },
     },
 };

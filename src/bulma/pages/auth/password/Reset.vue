@@ -1,31 +1,60 @@
 <template>
-    <auth-form is-reset
-        action="Set a new password"
-        route="password.reset"
-        @success="success">
-        <template v-slot:password-strength="props">
-            <p class="help">
-                <password-strength v-bind="props"/>
-            </p>
-        </template>
+    <auth-form action="Set a new password"
+        endpoint="password.reset"
+        icon="lock"
+        :payload="payload"
+        @success="success"
+        @submitting="status = null">
+        <p class="has-text-success is-size-7"
+            v-if="status">
+            {{ status }}
+        </p>
+        <email v-model="payload.email"/>
+        <password v-model="payload.password"
+            autocomplete="off"/>
+        <p class="help">
+            <password-strength :password="payload.password"/>
+        </p>
+        <confirmation v-model="payload.password_confirmation"
+            :match="match"/>
     </auth-form>
 </template>
 
 <script>
 import AuthForm from '../components/AuthForm.vue';
 import PasswordStrength from '../components/PasswordStrength.vue';
+import Email from '../components/fields/Email.vue';
+import Password from '../components/fields/Password.vue';
+import Confirmation from '../components/fields/Confirmation.vue';
 
 export default {
     name: 'Reset',
 
-    components: { AuthForm, PasswordStrength },
+    components: { AuthForm, Email, PasswordStrength, Password, Confirmation },
 
-    inject: ['toastr'],
+    data: (v) => ({
+        payload: {
+            email: '',
+            password: '',
+            password_confirmation: '',
+            token: v.$route.params.token,
+        },
+        status: null,
+    }),
+
+    computed: {
+        match() {
+            const { password, password_confirmation } = this.payload;
+
+            return password.length > 0
+                && password === password_confirmation;
+        },
+    },
 
     methods: {
         success({ status }) {
-            this.toastr.success(status);
-            setTimeout(() => this.$router.push({ name: 'login' }), 350);
+            this.status = status;
+            setTimeout(() => this.$router.push({ name: 'login' }), 500);
         },
     },
 };
