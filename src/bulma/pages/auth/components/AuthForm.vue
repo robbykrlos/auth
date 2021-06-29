@@ -3,7 +3,7 @@
         <div class="box p-3">
             <div class="logo mb-3 is-flex">
                 <figure class="image is-48x48  is-clickable is-flex"
-                    @click="$router.push({ name: 'login' }).catch(routeErrorHandler)">
+                    @click="$router.push({ name: 'login' }).catch(routerErrorHandler)">
                     <img src="/images/logo.svg"
                         :alt="meta.appName">
                 </figure>
@@ -29,7 +29,7 @@ export default {
 
     components: { Submit },
 
-    inject: ['routeErrorHandler'],
+    inject: ['routerErrorHandler'],
 
     data: () => ({
         errors: new Errors(),
