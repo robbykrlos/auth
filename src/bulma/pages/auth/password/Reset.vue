@@ -32,6 +32,8 @@ export default {
 
     components: { AuthForm, Email, PasswordStrength, Password, Confirmation },
 
+    inject: ['routeErrorHandler'],
+
     data: (v) => ({
         payload: {
             email: '',
@@ -54,7 +56,8 @@ export default {
     methods: {
         success({ status }) {
             this.status = status;
-            setTimeout(() => this.$router.push({ name: 'login' }), 500);
+            setTimeout(() => this.$router.push({ name: 'login' })
+                .catch(this.routeErrorHandler), 500);
         },
     },
 };
