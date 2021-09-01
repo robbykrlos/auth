@@ -13,6 +13,9 @@
                 <slot/>
                 <submit v-bind="$attrs"
                     v-on="$listeners"/>
+                <component v-for="item in loginCompoenents"
+                   :is="item"
+                   :key="item"/>
                 <slot name="footer"/>
             </form>
         </div>
@@ -20,7 +23,7 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import Errors from '@enso-ui/laravel-validation';
 import Submit from './Submit.vue';
 
@@ -40,13 +43,14 @@ export default {
 
     computed: {
         ...mapState(['meta']),
+        ...mapGetters('auth', ['loginCompoenents']),
     },
 
     provide() {
         return {
             state: this.state,
             errors: this.errors,
-        }
+        };
     },
 };
 </script>

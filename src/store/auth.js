@@ -4,6 +4,7 @@ export const state = {
     isAuth: localStorage.getItem('isAuth') === 'true',
     intendedRoute: null,
     intendedPath: null,
+    loginComponents: [],
 };
 
 export const mutations = {
@@ -18,6 +19,11 @@ export const mutations = {
     },
     setIntendedRoute: (state, value) => (state.intendedRoute = value),
     setIntendedPath: (state, value) => (state.intendedPath = value),
+    registerLoginComponent: (state, component) => (state.loginCompoent = [...state.loginCompoent, component]),
+};
+
+export const getters = {
+    loginComponents: state => state.loginCompoent,
 };
 
 export const actions = {
