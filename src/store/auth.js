@@ -17,7 +17,7 @@ export const mutations = {
         localStorage.removeItem('authorization');
     },
     setIntendedRoute(state, value) {
-        if (value !== 'login') {
+        if (value && value.name !== 'login') {
             state.intendedRoute = value;
         }
     },
